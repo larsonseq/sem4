@@ -1,0 +1,18 @@
+-- Inserting into department table
+INSERT INTO department (deptid, deptname) VALUES (1, 'IT');
+
+INSERT INTO clients (clientid, clientname, clientlocation) VALUES (1, 'ABC Corporation', 'Cityville');
+
+INSERT INTO clientrepresentative (repid, name, contact, clientid) VALUES (1, 'John Doe', 1234567890, 1);
+
+-- Inserting into employee table
+INSERT INTO employee (empid, name, jobrole, joindate, yearsofexperience, deptid) VALUES (1, 'Alice Smith', 'Software Engineer', '2024-02-15', NULL, 1);
+
+-- Inserting into project table
+INSERT INTO project (projectid, status, budget, clientid) VALUES (1, 'In Progress', 50000.0000, 1);
+
+-- Inserting into manager table
+INSERT INTO manager (empid) VALUES (1);
+
+-- Inserting into leaves table
+INSERT INTO leaves (leavesleft, leavesused, empid) VALUES (20, 5, 1);

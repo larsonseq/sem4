@@ -1,0 +1,12 @@
+#files
+*.pdf
+*.docx
+*.pptx
+
+
+#folders
+*miniproject*/
+mini*/
+project*/
+react*/
+oracleStuff/

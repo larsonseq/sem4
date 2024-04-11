@@ -1,0 +1,44 @@
+CREATE TABLE department (
+    deptid NUMBER(6) NOT NULL PRIMARY KEY,
+    deptname VARCHAR(20)
+);
+
+CREATE TABLE clients (
+    clientid NUMBER(6) NOT NULL PRIMARY KEY, 
+    clientname VARCHAR(40) NOT NULL,
+    clientlocation VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE clientrepresentative (
+    repid NUMBER(6) NOT NULL PRIMARY KEY,
+    name VARCHAR(40) NOT NULL,
+    contact NUMBER(10) NOT NULL,
+    clientid NUMBER(6) NOT NULL REFERENCES clients(clientid)
+);
+
+CREATE TABLE employee (
+    empid NUMBER(6) NOT NULL PRIMARY KEY,
+    name VARCHAR(40) NOT NULL,
+    jobrole VARCHAR(20) NOT NULL,
+    joindate DATE NOT NULL, 
+    deptid NUMBER(6) REFERENCES department(deptid)
+);
+
+CREATE TABLE project (
+    projectid NUMBER(6) NOT NULL PRIMARY KEY,
+    status VARCHAR(20),
+    budget NUMBER(20, 4),
+    clientid NUMBER(6) REFERENCES clients(clientid)
+);
+
+CREATE TABLE manager (
+    empid NUMBER(6) NOT NULL REFERENCES employee(empid),
+    PRIMARY KEY (empid)
+);
+
+CREATE TABLE leaves (
+    leavesleft INT NOT NULL DEFAULT 0,
+    leavesused INT NOT NULL DEFAULT 0,
+    empid NUMBER(6) NOT NULL REFERENCES employee(empid),
+    PRIMARY KEY (empid)
+);
