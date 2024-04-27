@@ -1,10 +1,8 @@
-
-
 def LCS(x, y):
     m = len(x)    #columns
     n = len(y)    #rows 
-    global c
-    global b
+    # global c
+    # global b
     b = [[0]*(n+1) for i in range(m+1)]
     c = [[0]*(n+1) for i in range(m+1)]
     for i in range(0,m+1):

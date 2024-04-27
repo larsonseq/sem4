@@ -1,0 +1,83 @@
+----------------------------------------------------------------------
+--Create table
+Create table Student (
+    stuid number(5),
+    dob Date,
+);
+
+create table studentPhone(
+    stuid number(5),
+    phone number(10)
+);
+
+create table studentName(
+    stuid number(5),
+    firstname varchar2(20),
+    middlename varchar2(20),
+    lname varchar2(20)
+);
+
+Create table books(
+    bookid number(5),
+    bookname varchar2(30),
+    price float,
+);
+
+Create TABLE bookauthor(
+    bookid number(2),
+    author varchar2(30)
+);
+
+Create table studentReadBook(
+    stuid number(5),
+    bookid number(5)
+);
+----------------------------------------------------------------------
+
+--Alter Commands
+Alter table student add address varchar(40);
+
+Alter table student drop column address;
+
+Alter table studentName modify firstname varchar2(40);
+
+Alter table studentReadBook rename to StudentRead;
+
+Alter table studentName rename column lname to lastname;
+----------------------------------------------------------------------
+
+
+--Truncate table
+Truncate table studentPhone;
+----------------------------------------------------------------------
+
+--Drop table
+Drop table studentPhone
+----------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+--DML COMMANDS 
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+--Insert Command
+Insert into Student values (00001, '6 April 2003', 21);
+Insert Into studentPhone values (00001, 8369756416);
+Insert into studentName values (00001, 'Larson', NULL, 'Sequeira');
+Insert inrto books values (01, 'MyBook', 500.00);
+insert into bookauthor values (01, 'James Bond');
+insert into studentread(00001, 01);
+insert into books values (02, 'Yourbook', 20);
+
+----------------------------------------------------------------------
+-- Update Commands
+update books set bookname = 'Sherlock Holmes' where bookid = 01;
+update bookauthor set author = 'Arthur Conan Doyle' where bookid = 01;
+----------------------------------------------------------------------
+
+--delete Commands
+delete from books where bookid = 02;

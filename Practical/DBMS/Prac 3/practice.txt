@@ -1,0 +1,178 @@
+-- refer to Prac2 practicePng.txt
+
+
+-------------------------------------------------------------------
+
+--Not NULL / NULL
+-------------------------------------------------------------------
+
+Alter table studentName modify firstname varchar2(20) not null;
+Alter table studentName modify firstname varchar2(20) null;
+
+
+-------------------------------------------------------------------
+--Unique
+-------------------------------------------------------------------
+
+alter table books add unique (bookname);
+
+--following command is not right, hence wont work
+alter table books drop constraint bookname;
+
+--on multiple columns
+CREATE TABLE Persons (
+ID int NOT NULL,
+LastName varchar(255) NOT NULL,
+FirstName varchar(255),
+Age int,
+CONSTRAINT UC_Person UNIQUE (ID,LastName)
+);
+
+--using add
+alter table persons add constraint UC_Person UNIQUE (ID,LastName);
+
+alter table persons drop constraint UC_Person;
+
+
+-------------------------------------------------------------------
+--primary 
+-------------------------------------------------------------------
+
+CREATE TABLE Persons (
+ID int NOT NULL PRIMARY KEY,
+LastName varchar(255) NOT NULL,
+FirstName varchar(255),
+Age int
+);
+
+---Cant do the below command because oracle has a name for each constraint,
+---and you are using column name and not constraintname
+--- so give a name to the constraint or find the name from oracle using:
+--- select constraint_name from user_constraint where table_name='Persons' and constraint_type='P';
+alter table persons drop constraint (id);
+
+--multiple tables
+CREATE TABLE Persons (
+ID int NOT NULL,
+LastName varchar(255) NOT NULL,
+FirstName varchar(255),
+Age int,
+CONSTRAINT PK_Person PRIMARY KEY (ID,LastName)
+);
+
+alter table persons add constraint PK_Person PRIMARY KEY (ID, LastName);
+
+alter table persons drop constraint PK_Person;
+
+
+----------------------------------------------------------------------
+--check 
+----------------------------------------------------------------------
+
+CREATE TABLE Persons (
+ID int NOT NULL,
+LastName varchar(255) NOT NULL,
+FirstName varchar(255),
+Age int CHECK (Age>=18)
+);
+
+CREATE TABLE Persons (
+ID int NOT NULL,
+LastName varchar(255) NOT NULL,
+FirstName varchar(255),
+Age int,
+City varchar(255),
+CONSTRAINT CHK_Person CHECK (Age>=18 AND City='Sandnes')
+);
+
+Alter table Persons add check (age >= 18);
+
+Alter table Persons add Constraint Chk_Age Check (Age >= 18);
+
+Alter table Persons drop Constraint Chk_Age;
+
+
+----------------------------------------------------------------------
+--Default
+----------------------------------------------------------------------
+
+CREATE TABLE Persons (
+ID int NOT NULL,
+LastName varchar(255) NOT NULL,
+FirstName varchar(255),
+Age int,
+City varchar(255) DEFAULT 'mumbai'
+);
+
+Alter table Persons Modify City Default 'Mumbai';
+
+--this wont work
+Alter table Persons modify City Drop Default;
+
+--This wont work
+ALTER TABLE Persons ALTER COLUMN City DROP DEFAULT;
+
+--this will
+alter table Persons modify City Default NULL;
+
+
+----------------------------------------------------------------------
+--Foreign KEY
+----------------------------------------------------------------------
+
+CREATE TABLE Orders (
+OrderID int NOT NULL PRIMARY KEY,
+OrderNumber int NOT NULL,
+PersonID int FOREIGN KEY REFERENCES Persons(PersonID)
+);
+
+ALTER TABLE Orders ADD FOREIGN KEY (PersonID) REFERENCES Persons(PersonID);
+--OR 
+ALTER TABLE Orders ADD CONSTRAINT FK_PersonOrder FOREIGN KEY (PersonID) REFERENCES Persons(PersonID);
+
+Alter table orders drop constraint FK_PersonOrder;
+
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+DCL COMMANDS
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+--To create a user 
+Create user username identified by password
+ 
+--To grant a privileage :
+grant abc_privileage on tablename to username 
+--where abc_privileage is privileage name
+--eg. update, insert, select, alter, etc
+
+--To revoke a privileage
+revoke abc_privileage on tablename from username
+
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+TCL Commands
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+--Commit: 
+--Commit command is used to save all the transactions to the database.
+Commit;
+
+--Rollback: 
+--Rollback command is used to undo transactions that have not already 
+--been saved to the database.
+Rollback;
+
+--SAVEPOINT: 
+--It is used to roll the transaction back to a certain point without 
+--rolling back the entire transaction.
+
+savepoint savepointname;
+--eg. savepoint s1;
+
+--rollback to a previous savepoint
+Savepoint s1;
+rollback to s1;

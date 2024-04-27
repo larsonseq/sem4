@@ -1,0 +1,37 @@
+----------------------------------------------------------------------
+select dept, avg(salary) from employee group by dept;
+
+----------------------------------------------------------------------
+select dept, max(salary) from employee group by dept;
+
+----------------------------------------------------------------------
+select * from employee where doj >= '23 October 2011' and salary = (select min(salary) from employee where doj >= '23 October 2011');
+
+----------------------------------------------------------------------
+select count(*) from employee;
+
+----------------------------------------------------------------------
+select * from employee where lower(dept) like 'computer' and salary = (select min(salary) from employee where lower(dept) = 'computer');
+
+----------------------------------------------------------------------
+select dept, ename from employee order by dept desc;
+
+----------------------------------------------------------------------
+select dept, sum(salary) from employee group by dept;
+
+----------------------------------------------------------------------
+select dept, avg(salary) from employee group by dept having avg(salary) > 30000;
+
+----------------------------------------------------------------------
+select ename, dept from employee order by ename asc order by dept desc;
+
+----------------------------------------------------------------------
+select dept, count(ename) from employee group by dept;
+
+----------------------------------------------------------------------
+select e1.ename, e2.ename from employee e1, employee e2 where e1.doj = e2.doj and e1.emp_id != e2.emp_id;
+
+----------------------------------------------------------------------
+select dept, ename from employee where dept in (select dept from employee group by dept having count(ename) < 2);
+
+----------------------------------------------------------------------

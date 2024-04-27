@@ -1,0 +1,72 @@
+----------------------------------------------------------------------
+-- Creating the employee table
+CREATE TABLE employee (
+    Emp_id INT,
+    Ename VARCHAR(50),
+    Salary DECIMAL(10, 2),
+    Age INT,
+    DOJ DATE,
+    DEPT VARCHAR(50)
+);
+
+-- Inserting 5 records into the employee table
+INSERT INTO employee VALUES (1, 'Suraj', 50000, 27, '04-May-2012', 'Finance');
+INSERT INTO employee VALUES (2, 'Bhaviya', 70000, 29, '12-April-2014', 'Finance');
+INSERT INTO employee VALUES(3, 'Saijal', 90000, 30, '23-June-2013', 'Marketing');
+INSERT INTO employee VALUES (4, 'Ronak', 35000, 42, '22-October-2011', 'Marketing');
+INSERT INTO employee VALUES (5, 'Aniket', 60000, 52, '20-November-2011', 'HR');
+
+----------------------------------------------------------------------
+select employee.ename from employee where salary > 50000;
+
+----------------------------------------------------------------------
+update employee set salary = salary * 1.1;
+select salary from employee;
+
+----------------------------------------------------------------------
+select * from employee where doj between '5 April 2012' and '23 June 2014';
+
+----------------------------------------------------------------------
+select ename from employee where salary > 70000 and doj > '3 Dec 2013';
+
+----------------------------------------------------------------------
+select ename from employee where ename like 's%' or ename like 'S%';
+
+----------------------------------------------------------------------
+select ename from employee where ename like '%e%';
+
+----------------------------------------------------------------------
+select * from employee where age in (29,30);
+
+----------------------------------------------------------------------
+select ename from employee where not doj = '5 April 2012';
+
+----------------------------------------------------------------------
+alter table employee add taxdeduction float;
+update employee set taxdeduction = salary * 0.2;
+
+----------------------------------------------------------------------
+select salary-taxdeduction from employee;
+
+----------------------------------------------------------------------
+select * from employee where exists (select * from employee where age > 25 and salary is not null);
+
+----------------------------------------------------------------------
+select ename from employee where age in (25,30,24,39);
+
+----------------------------------------------------------------------
+select * from employee where doj not in ('22-oct-2012', '20-feb-2011','03-dec-2013');
+
+----------------------------------------------------------------------
+select ename from employee order by salary desc;
+
+----------------------------------------------------------------------
+select ename from employee where doj >= '5 april 2012' order by ename asc;
+
+----------------------------------------------------------------------
+select * from employee where age is not null;
+
+----------------------------------------------------------------------
+select ename from employee where age >= all (select age from employee where salary > 5000);
+
+----------------------------------------------------------------------

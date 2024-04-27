@@ -6,7 +6,8 @@ class RabinKarp:
         self.prime = prime
         self.text_len = len(text)
         self.pattern_len = len(pattern)
-        self.radix_power = pow(radix, self.pattern_len - 1, prime)   # (radix**(pattern_length-1))%prime
+        self.radix_power = pow(radix, self.pattern_len - 1, prime)    # (radix**(pattern_length-1))%prime
+        #self.radix_power = pow(radix, len(pattern) - 1) % prime      # works
         self.pattern_hash = self.calculate_hash(pattern)
         self.matches = []
 
