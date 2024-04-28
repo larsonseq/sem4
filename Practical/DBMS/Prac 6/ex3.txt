@@ -1,0 +1,16 @@
+----------------------------------------------------------------------
+select d.* from empdept d where d.deptid in (select d1.deptid from empdept d1 MINUS select e1.department from employee e1 group by department);
+
+----------------------------------------------------------------------
+select s1.salary, s1.empid from salary s1 where s1.salary >= 2300 INTERSECT select s2.salary, s2.empid from salary s2 where s2.salary <= 5000;
+
+----------------------------------------------------------------------
+select e.empid from employee e INTERSECT select s.empid from salary s where s.salary < 2000;
+
+----------------------------------------------------------------------
+select e.empname from employee e where e.empname like 'A%' or e.empname like 'N%' or e.empname like 'P%';
+
+----------------------------------------------------------------------
+select e1.* from employee e1 where e1.empid in (select e2.empid from employee e2 MINUS select s2.empid from salary s2 where s2.salary < 2000);
+
+----------------------------------------------------------------------

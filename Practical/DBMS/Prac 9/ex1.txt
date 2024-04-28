@@ -1,0 +1,55 @@
+---------------------------------------------------------------------------------
+Create or replace procedure printrandomstuff 
+AS 
+temp int;
+BEGIN
+select FLOOR(DBMS_RANDOM.VALUE(0, 100)) into temp from dual;
+DBMS_OUTPUT.PUT_LINE(temp);
+END;
+/
+
+BEGIN
+printrandomstuff();
+END;
+/
+
+---------------------------------------------------------------------------------
+create procedure addstuff
+(num1 IN int, num2 IN int, total out int)
+AS
+BEGIN
+total := num1 + num2;
+end addstuff;
+/
+
+declare 
+num1 int := &num1;
+num2 int := &num2;
+result int;
+BEGIN
+addstuff(num1, num2, result);
+DBMS_OUTPUT.PUT_LINE(result);
+end;
+/
+
+---------------------------------------------------------------------------------
+create procedure areaofcircle
+(radius IN float, area OUT float)
+AS
+BEGIN
+area := 22 * radius * radius / 7;
+end areaofcircle;
+/
+
+DECLARE
+area float;
+r float := &radius;
+BEGIN
+areaofcircle(r, area);
+DBMS_OUTPUT.PUT_LINE('Area is ' || area);
+End;
+/
+
+---------------------------------------------------------------------------------
+
+--Procedure to update any table and reflect 

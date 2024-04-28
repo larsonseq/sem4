@@ -1,0 +1,38 @@
+----------------------------------------------------------------------
+create table employee (empid number(3), empname varchar(20), department varchar(5), contactno number(10), emailid varchar(20), empheadid number(3));
+insert into employee values (101, 'Isha', 'E-101', 1234567890, 'abc@gmail.com', 105);
+insert into employee values (103, 'Neha', 'E-101', 1234567890, 'abc@gmail.com', 101);
+insert into employee values (102, 'Priya', 'E-104', 1234567890, 'abc@gmail.com', 103); 
+insert into employee values (104, 'Rahul', 'E-102', 1234567890, 'abc@gmail.com', 105);
+insert into employee values (105, 'Abishek', 'E-101', 1234567890, 'abc@gmail.com', 102);
+
+create table salary (empid number(3), salary float, ispermanent varchar(3));
+create table Empdept (deptid varchar(20), deptname varchar(20), depthead number(3));
+insert into empdept values ('E-101', 'HR', 105);
+insert into empdept values ('E-102', 'Development', 101);
+insert into empdept values ('E-103', 'House Keeping', '');
+insert into empdept values ('E-104', 'Sales', 104);
+insert into empdept values ('E-104', 'Sales', 104);
+insert into empdept values ('E-105', 'Purchase', 105);
+insert into salary values (101, 2000, 'yes');
+insert into salary values (102, 10000, 'yes');
+insert into salary values (103, 5000, 'no');
+insert into salary values (104, 1900, 'yes');
+insert into salary values (105, 2300, 'yes'); 
+
+----------------------------------------------------------------------
+select empname, deptname from employee natural join empdept;
+
+----------------------------------------------------------------------
+select e.empname, d.deptname from employee e right join empdept d on e.department = d.deptid;
+
+----------------------------------------------------------------------
+select e1.empname, e2.empname from employee e1, employee e2 where e1.empheadid = e2.empid;
+
+----------------------------------------------------------------------
+select e.empname, d.deptname from employee e inner join empdept d on e.department != d.deptid;
+
+----------------------------------------------------------------------
+select e.empname, d.deptname from employee e join empdept d on e.department = d.deptid;
+
+----------------------------------------------------------------------

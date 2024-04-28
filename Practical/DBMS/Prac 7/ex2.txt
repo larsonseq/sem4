@@ -1,0 +1,99 @@
+----------------------------------------------------------------------
+-- Create the Employee table
+CREATE TABLE Employee (
+    eid VARCHAR(5),
+    ename VARCHAR(15),
+    emobile NUMBER(10),
+    salary NUMBER(10),
+    ecountry VARCHAR(15),
+    designation VARCHAR(10)
+); 
+
+-- Insert values into the Employee table  
+INSERT INTO Employee VALUES ('101', 'Isha', 1234567890, 105, 'India', 'Manager');
+INSERT INTO Employee VALUES ('102', 'Priya', 1234567890, 103, 'India', 'Development');
+INSERT INTO Employee VALUES ('103', 'Neha', 1234567890, 101, 'India', 'Housekeeping');
+INSERT INTO Employee VALUES ('104', 'Rahul', 1234567890, 105, 'India', 'Sales'); 
+INSERT INTO Employee VALUES ('111', 'Michael', 9876543210, 130, 'Australia', 'Manager');
+INSERT INTO Employee VALUES ('112', 'Sophie', 8765432109, 135, 'Canada', 'Development');
+INSERT INTO Employee VALUES ('113', 'Liam', 7654321098, 140, 'UK', 'Housekeeping');
+
+----------------------------------------------------------------------
+create or replace trigger avoidupdatesalary 
+before update 
+of salary on employee
+for each row
+BEGIN
+    RAISE_APPLICATION_ERROR(-20001,'Salary Cannot be updated');
+END;
+/
+
+----------------------------------------------------------------------
+Create or REPLACE Trigger noinsertionOnWeekends 
+before Insert
+on employee
+for each row
+BEGIN
+    IF to_char(sysdate, 'DY') in ( 'SAT') THEN
+        DBMS_OUTPUT.PUT_LINE('Cannot Insert on Sundays Or Saturdays');
+        RAISE_APPLICATION_ERROR(-20001, 'Cannot Insert on Weekends');
+    END IF;
+END;
+/
+
+----------------------------------------------------------------------
+Create or replace trigger viewempid
+after delete
+on employee
+referencing OLD as old New as new 
+for each row
+BEGIN
+    DBMS_OUTPUT.PUT_LINE(:old.eid || ' Was deleted');
+END;
+/
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+CREATE TABLE Department (
+    Did NUMBER PRIMARY KEY,
+    Dname VARCHAR2(100),
+    Location VARCHAR2(100),
+    Dmgr VARCHAR2(100)
+);
+
+INSERT INTO Department (Did, Dname, Location, Dmgr)
+VALUES (1, 'Finance', 'New York', 'John Smith');
+
+INSERT INTO Department (Did, Dname, Location, Dmgr)
+VALUES (2, 'Marketing', 'Los Angeles', 'Jane Doe');
+
+INSERT INTO Department (Did, Dname, Location, Dmgr)
+VALUES (3, 'IT', 'San Francisco', 'Michael Johnson');
+
+----------------------------------------------------------------------
+CREATE OR REPLACE TRIGGER LOCUPDATE 
+BEFORE UPDATE 
+OF location ON Department
+for each row
+BEGIN 
+    DBMS_OUTPUT.PUT_LINE(sysdate);
+END;
+/
+
+----------------------------------------------------------------------
+Create or replace trigger upmgr
+before update 
+of dmgr on Department
+referencing old as old new as new
+for each row
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('DMGR of ' || :old.did || ' was updated to ' || :new.dmgr || ' from ' || :old.dmgr);
+END;
+/
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+
+drop trigger triggername;
+set serveroutput on;

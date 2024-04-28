@@ -1,0 +1,59 @@
+---------------------------------------------------------------------------------
+create or replace function facto (n int)
+return int
+IS
+fact int := 1;
+num int := n;
+BEGIN
+    while num != 0 loop
+        fact := fact * num;
+        num := num - 1;
+    end loop;
+return fact;
+end facto;
+/
+
+declare
+i int;
+BEGIN
+i := facto(5);
+DBMS_OUTPUT.PUT_LINE(i);
+end;
+/
+
+---------------------------------------------------------------------------------
+create or replace function constr (str1 IN varchar, str2 IN varchar)
+return varchar
+IS
+str3 varchar(100);
+BEGIN
+str3 := str1 || str2;
+return str3;
+end constr;
+/
+
+BEGIN
+DBMS_OUTPUT.PUT_LINE(constr('Hello ', 'world'));
+end;
+/
+
+---------------------------------------------------------------------------------
+create or replace function multiply (num1 int, num2 int)
+return int
+AS
+result int;
+BEGIN
+result := num1 * num2;
+return result;
+end;
+/
+
+begin
+DBMS_OUTPUT.PUT_LINE(multiply(5,2));
+end;
+/
+
+---------------------------------------------------------------------------------
+-- Program to retrieve the name of the employee having employee id “E02”.
+
+---------------------------------------------------------------------------------

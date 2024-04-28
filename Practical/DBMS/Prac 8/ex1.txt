@@ -1,0 +1,94 @@
+---------------------------------------------------------------------------------
+DECLARE
+temp int;
+BEGIN
+select FLOOR(DBMS_RANDOM.VALUE(0,100)) into temp from dual;
+DBMS_OUTPUT.PUT_LINE(temp);
+END;
+/
+
+---------------------------------------------------------------------------------
+DECLARE 
+sal float;
+BEGIN
+select salary into sal from employee where eid = 'E106';
+DBMS_OUTPUT.PUT_LINE('Salary is ' || sal);
+END;
+/
+
+---------------------------------------------------------------------------------
+DECLARE
+per float;
+marks int := &Marks;
+total int := &Total;
+BEGIN
+    per := marks * 100 / total;
+    IF per >=85 then
+        DBMS_OUTPUT.PUT_LINE('Distinction');
+    elsif per >= 65 then
+        DBMS_OUTPUT.PUT_LINE('Fine! Could be better');
+    elsif per >= 40 then
+        DBMS_OUTPUT.PUT_LINE('Okay you passed');
+    else
+        DBMS_OUTPUT.PUT_LINE('U Failed!!!');
+    End IF;
+END;
+/
+
+---------------------------------------------------------------------------------
+DECLARE
+num1 int := &num1;
+num2 int := &num2;
+BEGIN
+if num1 > num2 then
+    DBMS_OUTPUT.PUT_LINE(num1 || ' is larger');
+else
+    DBMS_OUTPUT.PUT_LINE(num2 || ' is larger');
+end if;
+end;
+/
+
+---------------------------------------------------------------------------------
+DECLARE
+num1 int := &num1;
+num2 int := &num2;
+total int;
+BEGIN
+loop
+    total := num1 + num2;
+    exit;
+end loop;
+DBMS_OUTPUT.PUT_LINE(total);
+end;
+/
+
+
+---------------------------------------------------------------------------------
+DECLARE
+i int;
+total int := 0;
+BEGIN
+ for i in 1..10 loop
+     total := total + i;
+ end loop;
+DBMS_OUTPUT.PUT_LINE(total);
+end;
+/
+
+---------------------------------------------------------------------------------
+DECLARE
+i int := 0;
+total int := 0;
+BEGIN
+    while i <= 10 loop
+        total := total + i;
+        i := i+1;
+    end loop;
+DBMS_OUTPUT.PUT_LINE(total);
+end;
+/
+
+---------------------------------------------------------------------------------
+
+select DBMS_RANDOM.VALUE(start, end+1) from dual;
+select DBMS_RANDOM.VALUE() from dual;                        --this will output a random value from 0 to 1

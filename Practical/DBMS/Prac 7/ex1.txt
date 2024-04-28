@@ -1,0 +1,44 @@
+----------------------------------------------------------------------
+-- Create the Employee table
+CREATE TABLE Employee (
+    eid VARCHAR(5),
+    ename VARCHAR(15),
+    emobile NUMBER(10),
+    salary NUMBER(10),
+    ecountry VARCHAR(15),
+    designation VARCHAR(10)
+); 
+
+-- Insert values into the Employee table  
+INSERT INTO Employee VALUES ('101', 'Isha', 1234567890, 105, 'India', 'Manager');
+INSERT INTO Employee VALUES ('102', 'Priya', 1234567890, 103, 'India', 'Development');
+INSERT INTO Employee VALUES ('103', 'Neha', 1234567890, 101, 'India', 'Housekeeping');
+INSERT INTO Employee VALUES ('104', 'Rahul', 1234567890, 105, 'India', 'Sales'); 
+INSERT INTO Employee VALUES ('111', 'Michael', 9876543210, 130, 'Australia', 'Manager');
+INSERT INTO Employee VALUES ('112', 'Sophie', 8765432109, 135, 'Canada', 'Development');
+INSERT INTO Employee VALUES ('113', 'Liam', 7654321098, 140, 'UK', 'Housekeeping');
+
+----------------------------------------------------------------------
+create view  India_emp_view as select * from employee where ecountry = 'India';
+
+----------------------------------------------------------------------
+create view Manager_emp_view as select * from employee where designation = 'Manager';
+
+----------------------------------------------------------------------
+select * from India_emp_view;
+
+----------------------------------------------------------------------
+select * from Manager_emp_view;
+
+----------------------------------------------------------------------
+INSERT INTO Employee VALUES ('108', 'Vikas', 1234567890, 109, 'India', 'HR'); 
+INSERT INTO Employee VALUES ('109', 'Aakash', 1234567890, 125, 'India', 'Marketing'); 
+
+select * from India_emp_view;
+
+----------------------------------------------------------------------
+update Manager_emp_view set emobile = 9876543210;
+
+select * from employee;
+
+----------------------------------------------------------------------

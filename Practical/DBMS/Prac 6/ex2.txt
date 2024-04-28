@@ -1,0 +1,20 @@
+----------------------------------------------------------------------
+select d.* from empdept d where d.deptid in (select department from employee where empid > 103);
+
+----------------------------------------------------------------------
+select * from employee where empheadid = (select empid from employee where empname = 'Priya');
+
+----------------------------------------------------------------------
+select * from employee where empid = (select depthead from empdept where deptname = 'HR');
+
+----------------------------------------------------------------------
+select * from employee where department = (select deptid from empdept where deptname = 'Development') and empid in (select empid from salary where ispermanent = 'yes');
+
+----------------------------------------------------------------------
+select e.empid, e.empname, s.salary from employee e, salary s where e.empid = s.empid and s.ispermanent = 'yes' and e.department = (select deptid from empdept where deptname = 'HR');
+
+----------------------------------------------------------------------
+select e.empname, s.salary from employee e inner join salary s on e.empid = s.empid 
+    where (e.empid, s.salary, e.department) in (select e1.empid, max(s1.salary), e1.department from employee e1 join salary s1 on e1.empid = s1.empid group by e1.department);
+
+----------------------------------------------------------------------
